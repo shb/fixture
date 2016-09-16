@@ -47,6 +47,23 @@ function default.grow_tree(pos, variety)
    default.log(variety.." tree sapling grows at "..minetest.pos_to_string(pos), "info")
 end
 
+-- Player harm themselves if they punch hard things with bare hands
+minetest.register_on_punchnode(function (pos, node, puncher)
+	if puncher:get_wielded_item():is_empty() == false then
+		return
+	end
+	-- Cracky things hurt when punched
+	local crack = minetest.get_node_group(node.name, "cracky")
+	if crack > 0 then
+		puncher:set_hp(puncher:get_hp()-crack)
+	end
+	-- So do justly unbreakable by hand ones
+	local obbh = minetest.get_node_group(node.name, "oddly_breakable_by_hand")
+	if obbh < 0 then
+		puncher:set_hp(puncher:get_hp()+obbh)
+	end
+end)
+
 minetest.register_abm( -- apple trees or default trees
    {
       nodenames = {"default:sapling"},
