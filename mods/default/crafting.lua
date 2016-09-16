@@ -352,7 +352,17 @@ minetest.register_craft(
    {
       output = "default:stick 4",
       recipe = {
-	 {"group:planks"},
+	 {"group:planks"}
+      }
+   })
+   
+minetest.register_craft(
+   {
+      output = "default:stick",
+      recipe = {
+	 {"","","group:leaves"},
+	 {"","group:leaves",""},
+	 {"group:leaves","",""}
       }
    })
 
