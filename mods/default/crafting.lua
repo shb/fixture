@@ -355,7 +355,14 @@ minetest.register_craft(
 	 {"group:planks"}
       }
    })
-   
+
+ minetest.register_craft(
+   {
+      output = "default:stick 3",
+      recipe = {
+	 {"default:papyrus"}
+      }
+   })  
 minetest.register_craft(
    {
       output = "default:stick",
